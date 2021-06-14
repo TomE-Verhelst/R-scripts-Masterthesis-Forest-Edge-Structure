@@ -1,0 +1,9 @@
+Transect	groundpoint
+BeLoT1	220
+BeLoT3	39	
+BeMeT1	121
+BeMeT3	5
+BeHiT1	124
+BeHiT3	105
+NFT1	61
+NFT2	243
