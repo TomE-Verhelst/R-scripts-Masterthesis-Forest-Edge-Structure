@@ -6,7 +6,7 @@ library(soundecology)
 
 ##set directory and load in sound files
 #ENTER desired working directory below (dir)
-dir <- ""								#directory to recordings
+dir <- ""						#directory to recordings
 files <-list.files(path=dir, full.names = TRUE)		#list of recordings
 
 
@@ -40,10 +40,10 @@ for (file in files){
 		aei <- acoustic_evenness(w, max_freq = 10000, freq_step = 1000)
 		bi <- bioacoustic_index(w, min_freq = 2000, max_freq = 10000)
 		ENT <- H(w, f = 48000)
-		ACI <- aci$AciTotAll_left_bymin  #selection of the wanted value
-		ADI <- adi$adi_left	         #selection of the wanted value
-		AEI <- aei$aei_left		   #selection of the wanted value
-		BI <- bi$left_area		   #selection of the wanted value
+		ACI <- aci$AciTotAll_left_bymin 	#selection of the wanted value
+		ADI <- adi$adi_left	         	#selection of the wanted value
+		AEI <- aei$aei_left		  	#selection of the wanted value
+		BI <- bi$left_area		   	#selection of the wanted value
       	ACIvec[rec] <- ACI
 		ADIvec[rec] <- ADI
 		AEIvec[rec] <- AEI
@@ -85,7 +85,7 @@ Mm <- rbind(Mm_ACI, Mm_ADI, Mm_AEI, Mm_BI, Mm_H)
 Me <- rbind(Me_ACI, Me_ADI, Me_AEI, Me_BI, Me_H)
 
 ##saving AI values in a dawn and dusk text file
-write.table(Mm, file = "C:/Users/vtom1/OneDrive/Documenten/DataverwerkingMT/April_AllAIs/Lo3P1_dawn_07test.txt", sep = "\t",
+write.table(Mm, file = ".txt", sep = "\t",		#ENTER desired text file name (name.txt)
             row.names = FALSE, col.names = TRUE)
-write.table(Me, file = "C:/Users/vtom1/OneDrive/Documenten/DataverwerkingMT/April_AllAIs/Lo3P1_dusk_07test.txt", sep = "\t",
+write.table(Me, file = ".txt", sep = "\t",		#ENTER desired text file name (name.txt)
             row.names = FALSE, col.names = TRUE)
