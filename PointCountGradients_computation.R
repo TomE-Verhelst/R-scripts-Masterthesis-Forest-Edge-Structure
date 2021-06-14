@@ -3,7 +3,7 @@ library("lidR")
 library("rgdal")
 
 ##resolution
-resol <- 0.25 #ENTER prefered resolution (high increase in runtime below 0.25)
+resol <- 0.25 #ENTER prefered resolution (big increase in runtime below 0.25)
 
 ##loading in pointcloud files
 #for the script to work, the loaded pointclouds need to be aligned with the
@@ -19,6 +19,24 @@ Fr1 <- 'NFT1_dev12.las'
 Fr2 <- 'NFT2_dev12.las'
 
 transects <- list(L1,L3,M1,M3,H1,H3,Fr1,Fr2)
+
+##Defining gapfrac() function; calculates the proportion of non NA values in a input matrix m
+gapfrac <- function(m){
+	dimension <- dim(m)
+	r <- dimension[1]
+	c <- dimension[2]
+	size <- length(m)
+	bernou <- matrix(1,nrow=r,ncol=c)
+	for (i in 1:r){
+		for (j in 1:c){
+			if (is.na(m[i,j])==TRUE){
+				bernou[i,j] <- 0		#switch to one if you prefer the proportion of NA values
+			}					#in the input matrix m				
+		}
+	}
+	nNA <- sum(bernou)
+	proportionNA <- nNA/size	
+}
 
 ##preallocation of the PC gradient matrices
 #PC gradient matrices contain 3 rows (3 layers) for each transect
@@ -54,7 +72,7 @@ for (transect in transects){
 					      (nzp+(j-1)*nzp+(i-1)*nyp*nzp)])
 			transect_matrix[,i,j] <- zvalues
 		}
-	}	#transect_matrix is the 3D matrix of the transect (values are PCs)
+	}		#transect_matrix is the 3D matrix of the transect (values are PCs)
 	
 	#defining layer height + layers
 	hls <- 0.5/resol	#height of the different vegetation layers
